@@ -1,0 +1,28 @@
+ifndef::snippets[]
+:snippets: ./target/generated-snippets
+endif::[]
+
+= EATS API
+:toc: left
+:toclevels: 4
+:toc-title: eats api
+
+== API TEST
+
+=== CURL FIELD
+include::{snippets}/main/curl-request.adoc[]
+
+=== Http Request FIELD
+include::{snippets}/main/http-request.adoc[]
+
+=== Http Response FIELD
+include::{snippets}/main/http-response.adoc[]
+
+=== HTTPIE RESPONSE FIELD
+include::{snippets}/main/httpie-request.adoc[]
+
+=== Request Body FIELD
+include::{snippets}/main/request-body.adoc[]
+
+=== Response Body FIELD
+include::{snippets}/main/response-body.adoc[]
