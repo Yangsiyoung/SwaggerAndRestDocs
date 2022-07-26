@@ -29,7 +29,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfo(
                 "시영이와 선종이의 API",
-                "지혜보고싶다 API.",
+                "API.",
                 "0.0.1",
                 "Terms of service",
                 new Contact("MemoStack", "https://memostack.tistory.com", "public.devhong@gmail.com"),
