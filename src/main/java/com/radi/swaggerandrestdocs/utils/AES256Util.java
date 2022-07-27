@@ -85,8 +85,7 @@ public class AES256Util {
         return new String(c.doFinal(byteStr), "UTF-8");
     }
 
-    public void verifyKey(String str) throws NoSuchAlgorithmException,
-            GeneralSecurityException, UnsupportedEncodingException {
+    public void verifyKey(String str) {
         try {
             String plainKey = this.decrypt(str);
             String timeString = plainKey.split(",")[1];
