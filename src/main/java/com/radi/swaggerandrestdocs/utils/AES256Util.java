@@ -1,5 +1,6 @@
 package com.radi.swaggerandrestdocs.utils;
 
+import com.radi.swaggerandrestdocs.exception.DecryptException;
 import org.apache.tomcat.util.codec.binary.Base64;
 
 import java.io.UnsupportedEncodingException;
@@ -76,11 +77,30 @@ public class AES256Util {
      * @throws GeneralSecurityException
      * @throws UnsupportedEncodingException
      */
-    public String decrypt(String str) throws NoSuchAlgorithmException,
+    private String decrypt(String str) throws NoSuchAlgorithmException,
             GeneralSecurityException, UnsupportedEncodingException {
         Cipher c = Cipher.getInstance("AES/CBC/PKCS5Padding");
         c.init(Cipher.DECRYPT_MODE, keySpec, new IvParameterSpec(iv.getBytes()));
         byte[] byteStr = Base64.decodeBase64(str.getBytes());
         return new String(c.doFinal(byteStr), "UTF-8");
+    }
+
+    public void verifyKey(String str) throws NoSuchAlgorithmException,
+            GeneralSecurityException, UnsupportedEncodingException {
+        try {
+            String plainKey = this.decrypt(str);
+            String timeString = plainKey.split(",")[1];
+
+            if(isAfter3Minute(timeString)) {
+                throw new DecryptException();
+            }
+        }catch (Exception e) {
+            throw new DecryptException();
+        }
+
+    }
+
+    private boolean isAfter3Minute(String timeString) {
+        return LocalDateTime.now().isAfter(LocalDateTime.parse(timeString).plusMinutes(5));
     }
 }
