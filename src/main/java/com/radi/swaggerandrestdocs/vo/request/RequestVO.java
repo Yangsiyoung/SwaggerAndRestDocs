@@ -11,14 +11,6 @@ public class RequestVO {
     private String param04;
     private String param05;
 
-//    public RequestVO() {
-//        this.param01 = "default value";
-//        this.param02 = "default value";
-//        this.param03 = "default value";
-//        this.param04 = "default value";
-//        this.param05 = "default value";
-//    }
-
     public RequestVO(String param01, String param02, String param03, String param04, String param05) {
         this.param01 = param01;
         this.param02 = param02;
@@ -26,14 +18,6 @@ public class RequestVO {
         this.param04 = param04;
         this.param05 = param05;
     }
-
-//    public RequestVO(String param01, String param02, String param03, String param04) {
-//        this.param01 = param01;
-//        this.param02 = param02;
-//        this.param03 = param03;
-//        this.param04 = param04;
-//        this.param05 = "default value";
-//    }
 
     public String getParam01() {
         return param01;
@@ -76,11 +60,11 @@ public class RequestVO {
     }
 
     public void checkField() {
-        if(this.param01 == null || "".equals(this.param01)) {
+        if (this.param01 == null || "".equals(this.param01)) {
             throw new Param01EmptyException();
         }
 
-        if(this.param02 == null|| "".equals(this.param02)) {
+        if (this.param02 == null || "".equals(this.param02)) {
             throw new Param02EmptyException();
         }
     }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.radi.swaggerandrestdocs.service.SampleService;
 import com.radi.swaggerandrestdocs.utils.AES256Util;
+import com.radi.swaggerandrestdocs.vo.request.MultipartVO;
 import com.radi.swaggerandrestdocs.vo.request.RequestVO;
 import com.radi.swaggerandrestdocs.vo.response.ResponseVO;
 import io.swagger.annotations.*;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 
@@ -68,6 +70,14 @@ class SampleController {
         aes256Util.verifyKey(key);
         requestVO.checkField();
         sampleService.save(requestVO);
+        return ResponseEntity.ok(new ResponseVO(200, "success"));
+    }
+
+    @PostMapping("/multipart")
+    public ResponseEntity<ResponseVO> processMultipartData(MultipartVO multipartVO, HttpServletRequest request) {
+        String key = request.getHeader("key");
+        aes256Util.verifyKey(key);
+        sampleService.saveFile(multipartVO);
         return ResponseEntity.ok(new ResponseVO(200, "success"));
     }
 

@@ -4,12 +4,16 @@ import com.radi.swaggerandrestdocs.exception.DecryptException;
 import com.radi.swaggerandrestdocs.exception.Param01EmptyException;
 import com.radi.swaggerandrestdocs.exception.Param02EmptyException;
 import com.radi.swaggerandrestdocs.vo.response.ResponseVO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class ExceptionController {
+
+    private Logger log = LoggerFactory.getLogger(ExceptionController.class);
 
     @ExceptionHandler(value = {Param01EmptyException.class})
     public ResponseEntity<ResponseVO> param01EmptyExceptionHandling() {
@@ -28,7 +32,8 @@ public class ExceptionController {
 
 
     @ExceptionHandler(value = {Exception.class})
-    public ResponseEntity<ResponseVO> generalExceptionHandling() {
+    public ResponseEntity<ResponseVO> generalExceptionHandling(Exception e) {
+        e.printStackTrace();
         return ResponseEntity.status(500).body(new ResponseVO(500, "잠시 서버에 문제가 생겼습니다."));
     }
 }
